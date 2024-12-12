@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Message</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        #message {
+            font-size: 20px;
+            color: #333;
+            white-space: pre-line; /* To preserve newlines */
+        }
+
+        #input-container {
+            margin-top: 20px;
+        }
+
+        #confirm-container {
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Hi Angelica, there's something special I want to share with you.</h1>
+    <p>Do you want to know the message?</p>
+
+    <div id="input-container">
+        <button onclick="confirmMessage()">Yes</button>
+        <button onclick="noMessage()">No</button>
+    </div>
+
+    <div id="confirm-container">
+        <p>Sure ka? There's no turning back if you press Yes.</p>
+        <button onclick="showMessage()">Yes</button>
+        <button onclick="cancelMessage()">Cancel</button>
+    </div>
+
+    <div id="message"></div>
+
+    <script>
+        // Function to print text with a delay
+        function printWithDelay(text, delay) {
+            let i = 0;
+            const messageElement = document.getElementById('message');
+            messageElement.innerHTML = ''; // Clear the previous message
+            const interval = setInterval(() => {
+                messageElement.innerHTML += text[i];
+                i++;
+                if (i === text.length) {
+                    clearInterval(interval);
+                }
+            }, delay);
+        }
+
+        // Function to show the confirmation prompt
+        function confirmMessage() {
+            document.getElementById('input-container').style.display = 'none';
+            document.getElementById('confirm-container').style.display = 'block';
+        }
+
+        // Function to show the full message when the user clicks the second "Yes"
+        function showMessage() {
+            const message = `
+Hello, Angelica!
+I just wanted to let you know that I find you cute and attractive...
+I have been admiring you for a while now...
+And I have to admit, I can't stop thinking about you....
+Even though we don't talk at school, whenever I look at you......................
+You have this remarkable way of brightening up my day with your smile and kindness.
+..................................................
+I like you, Angelica.
+I know we hardly interact at school.................. that's why I want to know you more personally....
+To know and understand what kind of person you are.....
+But no pressure!
+You don't have to reciprocate my feelings, Angelica...
+And if you are not yet ready to talk to someone, I'll respect that.
+Have a nice day ahead!
+-Kyeortie
+
+            `;
+            printWithDelay(message, 100); // Slow text display with 100ms delay per character
+
+            // Hide the confirmation container
+            document.getElementById('confirm-container').style.display = 'none';
+        }
+
+        // Function to cancel the confirmation
+        function cancelMessage() {
+            document.getElementById('confirm-container').style.display = 'none';
+            document.getElementById('input-container').style.display = 'block';
+        }
+
+        // Function when the user clicks "No"
+        function noMessage() {
+            document.getElementById('message').innerText = 'Ayaw mo, edi don\'t';
+        }
+    </script>
+
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+	}
+	// ]]>
+</script>
+</body>
+</html>
